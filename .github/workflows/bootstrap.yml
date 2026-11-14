@@ -23,11 +23,12 @@ jobs:
           pnpm typecheck
           pnpm test
           pnpm build
-      - name: Commit scaffold
+      - name: Commit validated files
         run: |
-          rm bootstrap_ritmo.py .github/workflows/bootstrap.yml
+          rm -f .github/workflows/ci.yml .github/workflows/deploy-web.yml
+          rm bootstrap_ritmo.py
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A
+          git add -A -- ':!.github/workflows'
           git commit -m 'feat: add phase zero workspace and responsive layout'
           git push
